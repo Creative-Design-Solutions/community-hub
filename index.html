@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bryan Gallagher — Project Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --deep:   #1A2236;
+      --deep-2: #222B40;
+      --ink:    #1C2333;
+      --muted:  #7A8BA8;
+      --cream:  #FDFAF5;
+      --sky:    #EEF4FA;
+      --sage:   #5B9E88;
+      --sage-l: #A0C4B8;
+      --gold:   #B8900A;
+      --faint:  rgba(28,35,51,0.07);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Syne', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    .hub-header {
+      background: var(--cream);
+      border-bottom: 1px solid var(--faint);
+      padding: 3.5rem 2.5rem 3rem;
+    }
+
+    .hub-header-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .hub-eyebrow {
+      font-size: 0.5rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 0.875rem;
+    }
+
+    .hub-title {
+      font-family: 'Cormorant', serif;
+      font-weight: 300;
+      font-size: clamp(2.75rem, 5.5vw, 4.5rem);
+      line-height: 1.0;
+      color: var(--ink);
+      letter-spacing: -0.03em;
+      margin-bottom: 0;
+    }
+
+    .hub-title em {
+      font-style: italic;
+      color: var(--sage);
+    }
+
+    .hub-subtitle {
+      font-size: 0.8125rem;
+      font-weight: 400;
+      color: var(--muted);
+      max-width: 340px;
+      line-height: 1.6;
+      padding-bottom: 0.375rem;
+    }
+
+    /* ── Utility bar ── */
+    .hub-utils {
+      background: var(--sky);
+      padding: 0.875rem 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      border-bottom: 1px solid rgba(28,35,51,0.07);
+    }
+
+    .hub-utils-label {
+      font-size: 0.4375rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .util-link {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    .util-link:hover { color: var(--sage); }
+
+    /* ── Main content ── */
+    .hub-main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 2.5rem 5rem;
+    }
+
+    .section-label {
+      font-size: 0.4375rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── Project cards ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+
+    .project-card {
+      background: #fff;
+      border: 1px solid var(--faint);
+      border-radius: 12px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      transition: box-shadow 0.2s;
+    }
+
+    .project-card:hover {
+      box-shadow: 0 6px 24px rgba(28,35,51,0.08);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .card-name {
+      font-family: 'Cormorant', serif;
+      font-weight: 400;
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      line-height: 1.1;
+    }
+
+    .status-badge {
+      font-size: 0.4375rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .status-live {
+      background: rgba(91,158,136,0.12);
+      color: var(--sage);
+    }
+
+    .status-building {
+      background: rgba(184,144,10,0.1);
+      color: var(--gold);
+    }
+
+    .status-planned {
+      background: rgba(122,139,168,0.12);
+      color: var(--muted);
+    }
+
+    .card-description {
+      font-size: 0.8125rem;
+      color: var(--muted);
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    /* ── What's next ── */
+    .card-next {
+      background: var(--sky);
+      border-radius: 8px;
+      padding: 0.875rem 1rem;
+    }
+
+    .card-next-label {
+      font-size: 0.375rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.375rem;
+    }
+
+    .card-next-text {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    /* ── Quick links ── */
+    .card-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding-top: 0.25rem;
+      border-top: 1px solid var(--faint);
+    }
+
+    .card-link {
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--ink);
+      text-decoration: none;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid var(--faint);
+      border-radius: 999px;
+      background: var(--cream);
+      transition: all 0.2s;
+    }
+
+    .card-link:hover {
+      background: var(--deep);
+      color: var(--sky);
+      border-color: var(--deep);
+    }
+
+    .card-link.primary {
+      background: var(--deep);
+      color: var(--sky);
+      border-color: var(--deep);
+    }
+
+    .card-link.primary:hover {
+      background: var(--deep-2);
+    }
+
+    /* ── Add project placeholder ── */
+    .project-card-add {
+      background: transparent;
+      border: 1.5px dashed rgba(28,35,51,0.15);
+      border-radius: 12px;
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 200px;
+      cursor: default;
+    }
+
+    .add-icon {
+      font-size: 1.5rem;
+      color: rgba(28,35,51,0.2);
+      line-height: 1;
+    }
+
+    .add-label {
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(28,35,51,0.25);
+    }
+
+    /* ── Footer ── */
+    .hub-footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.625rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(28,35,51,0.2);
+      border-top: 1px solid var(--faint);
+    }
+
+    @media (max-width: 600px) {
+      .hub-header { padding: 2.5rem 1.5rem 2rem; }
+      .hub-utils { padding: 0.875rem 1.5rem; gap: 1rem; }
+      .hub-main { padding: 2rem 1.5rem 4rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hub-header">
+    <div class="hub-header-inner">
+      <div class="hub-eyebrow">Bryan Gallagher</div>
+      <h1 class="hub-title">Project<br><em>Hub.</em></h1>
+      <p class="hub-subtitle">A workspace for what's being built — where each project lives, what's next, and how to get there.</p>
+    </div>
+  </header>
+
+  <div class="hub-utils">
+    <span class="hub-utils-label">Tools</span>
+    <a href="investments.html" class="util-link">Investment Tracker</a>
+  </div>
+
+  <main class="hub-main">
+    <div class="section-label">Active Projects</div>
+
+    <div class="projects-grid">
+
+      <!-- From the Kitchen -->
+      <div class="project-card">
+        <div class="card-header">
+          <div class="card-name">From the Kitchen</div>
+          <span class="status-badge status-live">Live</span>
+        </div>
+        <p class="card-description">A personal recipe library built as an interactive page-flip book. Canela typography, Firefly photography, and real stories behind each dish.</p>
+        <div class="card-next">
+          <div class="card-next-label">What's next</div>
+          <div class="card-next-text">Add more recipes — cook the short ribs, photograph them. Wire in a voice recording of the recipe read-aloud.</div>
+        </div>
+        <div class="card-links">
+          <a href="https://anna-bryan-joys.github.io/from-the-kitchen/" target="_blank" class="card-link primary">View Live Site</a>
+          <a href="https://github.com/Anna-Bryan-Joys/from-the-kitchen" target="_blank" class="card-link">GitHub Repo</a>
+        </div>
+      </div>
+
+      <!-- Creative Design Solutions -->
+      <div class="project-card">
+        <div class="card-header">
+          <div class="card-name">Creative Design Solutions</div>
+          <span class="status-badge status-building">Building</span>
+        </div>
+        <p class="card-description">Creative design, workflow and automation systems for small businesses — websites, staff portals, AI tools, and process design for people who want more structure and flow.</p>
+        <div class="card-next">
+          <div class="card-next-label">What's next</div>
+          <div class="card-next-text">Build the website and structure for Creative Design Solutions — the home base for freelance design and automation work.</div>
+        </div>
+        <div class="card-links">
+          <a href="investments.html" class="card-link primary">Investment Tracker</a>
+        </div>
+      </div>
+
+      <!-- Medical Practice -->
+      <div class="project-card">
+        <div class="card-header">
+          <div class="card-name">Wisdom Surgery</div>
+          <span class="status-badge status-building">Building</span>
+        </div>
+        <p class="card-description">Website, staff portal, and Xero accounting setup for Anna's medical practice. A flagship project for the web design & automation business.</p>
+        <div class="card-next">
+          <div class="card-next-label">What's next</div>
+          <div class="card-next-text">Build and launch the practice website. Set up staff portal and connect Xero for accounting.</div>
+        </div>
+        <div class="card-links">
+          <a href="#" class="card-link primary">Coming Soon</a>
+        </div>
+      </div>
+
+      <!-- Placeholder -->
+      <div class="project-card-add">
+        <div class="add-icon">+</div>
+        <div class="add-label">Next project</div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="hub-footer">
+    Bryan Gallagher &nbsp;·&nbsp; Community Hub &nbsp;·&nbsp; 2026
+  </footer>
+
+</body>
+</html>
