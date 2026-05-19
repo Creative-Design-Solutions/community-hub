@@ -638,7 +638,7 @@
         <a href="https://app.clickup.com" target="_blank" class="dropdown-link">ClickUp</a>
         <a href="https://calendar.google.com" target="_blank" class="dropdown-link">Google Calendar</a>
         <a href="https://mail.google.com" target="_blank" class="dropdown-link">Gmail</a>
-        <a href="https://outlook.com" target="_blank" class="dropdown-link">Outlook</a>
+        <a href="ms-outlook://" onclick="if(window.pywebview){event.preventDefault();window.pywebview.api.open_external('ms-outlook://');}else{event.preventDefault();window.location.href='ms-outlook://'}" class="dropdown-link">Outlook</a>
       </div>
     </div>
 
