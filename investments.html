@@ -266,6 +266,18 @@
     }
     .add-btn:hover { opacity: 0.8; }
 
+    /* ── Back button ── */
+    .back {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.6875rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--sage-l); text-decoration: none;
+      opacity: 0.8; transition: opacity 0.15s;
+      margin-bottom: 1.25rem;
+    }
+    .back:hover { opacity: 1; }
+
     /* ── Footer ── */
     footer {
       padding: 2rem 4rem;
@@ -281,6 +293,7 @@
 <body>
 
 <header>
+  <a href="http://localhost:8765" class="back">← Hub</a>
   <div class="header-eyebrow">Bryan Gallagher · 2026</div>
   <h1>The Investment List</h1>
   <p>Tools, programs, and platforms worth exploring as the work grows. Not purchases — possibilities. Things to revisit when the moment is right.</p>
